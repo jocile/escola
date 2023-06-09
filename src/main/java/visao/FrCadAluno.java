@@ -4,6 +4,8 @@
  */
 package visao;
 
+import com.jocile.escola.entidades.Aluno;
+
 public class FrCadAluno extends javax.swing.JFrame {
 
     public FrCadAluno() {
@@ -31,14 +33,14 @@ public class FrCadAluno extends javax.swing.JFrame {
         edtIdade = new javax.swing.JTextField();
         edtMatricula = new javax.swing.JTextField();
         btnNovo = new javax.swing.JButton();
-        jbtSalvar = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         lblMatricula = new javax.swing.JLabel();
         pnlResultado = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txaResultado = new javax.swing.JTextArea();
+        edtResultado = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,7 +60,12 @@ public class FrCadAluno extends javax.swing.JFrame {
             }
         });
 
-        jbtSalvar.setText("Salvar");
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +112,7 @@ public class FrCadAluno extends javax.swing.JFrame {
                         .addComponent(btnExcluir)))
                 .addGap(18, 18, 18)
                 .addGroup(pnlEdicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbtSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(edtMatricula))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -115,7 +122,7 @@ public class FrCadAluno extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlEdicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovo)
-                    .addComponent(jbtSalvar)
+                    .addComponent(btnSalvar)
                     .addComponent(btnCancelar)
                     .addComponent(btnEditar)
                     .addComponent(btnExcluir))
@@ -135,9 +142,9 @@ public class FrCadAluno extends javax.swing.JFrame {
                     .addComponent(edtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        txaResultado.setColumns(20);
-        txaResultado.setRows(5);
-        jScrollPane2.setViewportView(txaResultado);
+        edtResultado.setColumns(20);
+        edtResultado.setRows(5);
+        jScrollPane2.setViewportView(edtResultado);
 
         javax.swing.GroupLayout pnlResultadoLayout = new javax.swing.GroupLayout(pnlResultado);
         pnlResultado.setLayout(pnlResultadoLayout);
@@ -196,6 +203,18 @@ public class FrCadAluno extends javax.swing.JFrame {
         this.resetarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        Aluno a = new Aluno();
+        a.setNome(edtNome.getText());
+        a.setSexo(edtSexo.getText().charAt(0));
+        int aux = Integer.parseInt(edtIdade.getText());
+        a.setIdade(aux);
+        a.setMatricula(edtMatricula.getText());
+
+        edtResultado.setText(a.toString()); //mostra o resultado
+        this.resetarCampos(false);
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -239,12 +258,13 @@ public class FrCadAluno extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JTextField edtIdade;
     private javax.swing.JTextField edtMatricula;
     private javax.swing.JTextField edtNome;
+    private javax.swing.JTextArea edtResultado;
     private javax.swing.JTextField edtSexo;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton jbtSalvar;
     private javax.swing.JLabel lblIdade;
     private javax.swing.JLabel lblMatricula;
     private javax.swing.JLabel lblNome;
@@ -252,7 +272,6 @@ public class FrCadAluno extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlEdicao;
     private javax.swing.JPanel pnlResultado;
-    private javax.swing.JTextArea txaResultado;
     // End of variables declaration//GEN-END:variables
 
     public void resetarCampos(boolean flag) {

@@ -65,5 +65,13 @@ public class Aluno {
         this.anoDeIngresso = anoDeIngresso;
     }
 
-    
+  @Override
+    public String toString() {
+        return ("__________________________\n"
+                + "Nome: " + this.nome + "\n"
+                + "Sexo:" + this.sexo + "\n"
+                + "Idade: " + this.idade + "\n"
+                + "Matricula: " + this.matricula + "\n"
+                + "__________________________\n");
+}
 }
