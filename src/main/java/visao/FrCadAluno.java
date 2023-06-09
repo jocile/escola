@@ -199,7 +199,15 @@ public class FrCadAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+        edtNome.setEnabled(false);
+        edtSexo.setEnabled(false);
+        edtIdade.setEnabled(false);
+        edtMatricula.setEnabled(false);
+
+        edtNome.setText("");
+        edtSexo.setText("");
+        edtIdade.setText("");
+        edtMatricula.setText("");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
