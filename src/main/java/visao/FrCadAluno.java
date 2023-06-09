@@ -9,10 +9,7 @@ public class FrCadAluno extends javax.swing.JFrame {
     public FrCadAluno() {
         initComponents();
         
-        edtNome.setEnabled(false);
-        edtSexo.setEnabled(false);
-        edtIdade.setEnabled(false);
-        edtMatricula.setEnabled(false);
+        this.resetarCampos(false);
     }
 
     /**
@@ -192,22 +189,11 @@ public class FrCadAluno extends javax.swing.JFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         
-        edtNome.setEnabled(true);
-        edtSexo.setEnabled(true);
-        edtIdade.setEnabled(true);
-        edtMatricula.setEnabled(true);
+        this.resetarCampos(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        edtNome.setEnabled(false);
-        edtSexo.setEnabled(false);
-        edtIdade.setEnabled(false);
-        edtMatricula.setEnabled(false);
-
-        edtNome.setText("");
-        edtSexo.setText("");
-        edtIdade.setText("");
-        edtMatricula.setText("");
+        this.resetarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
@@ -269,4 +255,17 @@ public class FrCadAluno extends javax.swing.JFrame {
     private javax.swing.JTextArea txaResultado;
     // End of variables declaration//GEN-END:variables
 
+    public void resetarCampos(boolean flag) {
+    edtNome.setEnabled(flag);
+    edtSexo.setEnabled(flag);
+    edtIdade.setEnabled(flag);
+    edtMatricula.setEnabled(flag);
+
+    if (!flag){    
+      edtNome.setText("");
+      edtSexo.setText("");
+      edtIdade.setText("");
+      edtMatricula.setText("");
+    }
+}
 }
