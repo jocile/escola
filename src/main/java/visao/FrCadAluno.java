@@ -5,6 +5,7 @@
 package visao;
 
 import com.jocile.escola.entidades.Aluno;
+import javax.swing.JOptionPane;
 
 public class FrCadAluno extends javax.swing.JFrame {
 
@@ -207,8 +208,16 @@ public class FrCadAluno extends javax.swing.JFrame {
         Aluno a = new Aluno();
         a.setNome(edtNome.getText());
         a.setSexo(edtSexo.getText().charAt(0));
-        int aux = Integer.parseInt(edtIdade.getText());
-        a.setIdade(aux);
+        
+        //Testa se o campo idade foi preenchido
+        String idadeLida = edtIdade.getText();
+        if (!idadeLida.isEmpty()) {
+          int aux = Integer.parseInt(idadeLida);
+          a.setIdade(aux);
+        }else{
+          JOptionPane.showMessageDialog(this,"Campo Idade obrigatório. ");
+        }
+        
         a.setMatricula(edtMatricula.getText());
 
         edtResultado.setText(a.toString()); //mostra o resultado
