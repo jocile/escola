@@ -5,13 +5,17 @@
 package visao;
 
 import com.jocile.escola.entidades.Aluno;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class FrCadAluno extends javax.swing.JFrame {
 
+    private ArrayList<Aluno> lista;
+
     public FrCadAluno() {
         initComponents();
 
+        lista = new ArrayList<>();
         this.resetarCampos(false);
     }
 
@@ -33,6 +37,16 @@ public class FrCadAluno extends javax.swing.JFrame {
             edtMatricula.setText("");
             edtAnoDeIngresso.setText("");
         }
+    }
+
+    public String mostrarLista() {
+        String listaCompleta = "";
+
+        for (int i = 0; i <= lista.size() - 1; i++) {
+            Aluno aux = lista.get(i);
+            listaCompleta = listaCompleta + aux.toString();
+        }
+        return listaCompleta;
     }
 
     /**
@@ -202,6 +216,7 @@ public class FrCadAluno extends javax.swing.JFrame {
                     .addComponent(edtAnoDeIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        edtResultado.setEditable(false);
         edtResultado.setColumns(20);
         edtResultado.setRows(5);
         jScrollPane2.setViewportView(edtResultado);
@@ -213,14 +228,14 @@ public class FrCadAluno extends javax.swing.JFrame {
             .addGroup(pnlResultadoLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlResultadoLayout.setVerticalGroup(
             pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlResultadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -231,9 +246,9 @@ public class FrCadAluno extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnlEdicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnlResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(170, 170, 170)
                         .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -247,8 +262,8 @@ public class FrCadAluno extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnlResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(pnlResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -279,7 +294,9 @@ public class FrCadAluno extends javax.swing.JFrame {
 
         a.setMatricula(edtMatricula.getText());
 
-        edtResultado.setText(a.toString()); //mostra o resultado
+        //Mostrando a lista de alunos
+        this.lista.add(a);
+        edtResultado.setText(this.mostrarLista());
         this.resetarCampos(false);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -314,8 +331,8 @@ public class FrCadAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_edtAnoDeIngressoKeyReleased
 
     /**
-         * @param args the command line arguments
-         */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
