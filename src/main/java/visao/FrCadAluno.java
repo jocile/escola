@@ -11,8 +11,24 @@ public class FrCadAluno extends javax.swing.JFrame {
 
     public FrCadAluno() {
         initComponents();
-        
+
         this.resetarCampos(false);
+    }
+
+    public void resetarCampos(boolean flag) {
+        edtNome.setEnabled(flag);
+        edtSexo.setEnabled(flag);
+        edtIdade.setEnabled(flag);
+        edtMatricula.setEnabled(flag);
+        edtAnodeIngresso.setEnabled(flag);
+
+        if (!flag) {
+            edtNome.setText("");
+            edtSexo.setText("");
+            edtIdade.setText("");
+            edtMatricula.setText("");
+            edtAnodeIngresso.setText("");
+        }
     }
 
     /**
@@ -39,6 +55,8 @@ public class FrCadAluno extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         lblMatricula = new javax.swing.JLabel();
+        lblAnoDeIngresso = new javax.swing.JLabel();
+        edtAnodeIngresso = new javax.swing.JTextField();
         pnlResultado = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         edtResultado = new javax.swing.JTextArea();
@@ -81,6 +99,8 @@ public class FrCadAluno extends javax.swing.JFrame {
 
         lblMatricula.setText("Matrícula:");
 
+        lblAnoDeIngresso.setText("Ano de ingresso");
+
         javax.swing.GroupLayout pnlEdicaoLayout = new javax.swing.GroupLayout(pnlEdicao);
         pnlEdicao.setLayout(pnlEdicaoLayout);
         pnlEdicaoLayout.setHorizontalGroup(
@@ -101,8 +121,10 @@ public class FrCadAluno extends javax.swing.JFrame {
                         .addGroup(pnlEdicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(edtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(edtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                        .addComponent(lblMatricula))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addGroup(pnlEdicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMatricula, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblAnoDeIngresso, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(pnlEdicaoLayout.createSequentialGroup()
                         .addComponent(btnNovo)
                         .addGap(30, 30, 30)
@@ -114,7 +136,8 @@ public class FrCadAluno extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnlEdicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edtMatricula))
+                    .addComponent(edtMatricula)
+                    .addComponent(edtAnodeIngresso))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         pnlEdicaoLayout.setVerticalGroup(
@@ -140,7 +163,9 @@ public class FrCadAluno extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlEdicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblIdade)
-                    .addComponent(edtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(edtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAnoDeIngresso)
+                    .addComponent(edtAnodeIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         edtResultado.setColumns(20);
@@ -176,9 +201,9 @@ public class FrCadAluno extends javax.swing.JFrame {
                             .addComponent(pnlEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pnlResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(196, 196, 196)
-                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                        .addGap(170, 170, 170)
+                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +221,7 @@ public class FrCadAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        
+
         this.resetarCampos(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
@@ -208,16 +233,16 @@ public class FrCadAluno extends javax.swing.JFrame {
         Aluno a = new Aluno();
         a.setNome(edtNome.getText());
         a.setSexo(edtSexo.getText().charAt(0));
-        
+
         //Testa se o campo idade foi preenchido
         String idadeLida = edtIdade.getText();
         if (!idadeLida.isEmpty()) {
-          int aux = Integer.parseInt(idadeLida);
-          a.setIdade(aux);
-        }else{
-          JOptionPane.showMessageDialog(this,"Campo Idade obrigatório. ");
+            int aux = Integer.parseInt(idadeLida);
+            a.setIdade(aux);
+        } else {
+            JOptionPane.showMessageDialog(this, "Campo Idade obrigatório. ");
         }
-        
+
         a.setMatricula(edtMatricula.getText());
 
         edtResultado.setText(a.toString()); //mostra o resultado
@@ -268,12 +293,14 @@ public class FrCadAluno extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JTextField edtAnodeIngresso;
     private javax.swing.JTextField edtIdade;
     private javax.swing.JTextField edtMatricula;
     private javax.swing.JTextField edtNome;
     private javax.swing.JTextArea edtResultado;
     private javax.swing.JTextField edtSexo;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblAnoDeIngresso;
     private javax.swing.JLabel lblIdade;
     private javax.swing.JLabel lblMatricula;
     private javax.swing.JLabel lblNome;
@@ -283,17 +310,4 @@ public class FrCadAluno extends javax.swing.JFrame {
     private javax.swing.JPanel pnlResultado;
     // End of variables declaration//GEN-END:variables
 
-    public void resetarCampos(boolean flag) {
-    edtNome.setEnabled(flag);
-    edtSexo.setEnabled(flag);
-    edtIdade.setEnabled(flag);
-    edtMatricula.setEnabled(flag);
-
-    if (!flag){    
-      edtNome.setText("");
-      edtSexo.setText("");
-      edtIdade.setText("");
-      edtMatricula.setText("");
-    }
-}
 }
