@@ -5,7 +5,12 @@
 package visao;
 
 import com.jocile.escola.entidades.Aluno;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class FrCadAluno extends javax.swing.JFrame {
@@ -21,6 +26,8 @@ public class FrCadAluno extends javax.swing.JFrame {
         indiceDeEdicao = -1;
         lista = new ArrayList<>();
         this.resetarCampos(false);
+        loadArquivoAlunos("Alunos.txt");
+        edtResultado.setText(this.mostrarLista());
     }
 
     public void hideShowCampos(boolean flag) {
@@ -89,6 +96,25 @@ public class FrCadAluno extends javax.swing.JFrame {
         return a;
     }
 
+    public void loadArquivoAlunos(String caminho){
+        FileReader f = null;
+        try {
+            f = new FileReader(caminho);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FrCadAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scanner arquivo = new Scanner(f);
+        arquivo.useDelimiter("\n");//lendo a linha
+        
+        String cabecalho = arquivo.next();
+        while (arquivo.hasNext()) {
+            String linhaLida = arquivo.next();
+            Aluno a = new Aluno();
+            a.fill(linhaLida);//usa alinha para prencher o aluno com: nome;sexo;idade;matricula;ano;
+            this.lista.add(a);
+        }
+        arquivo.close();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
