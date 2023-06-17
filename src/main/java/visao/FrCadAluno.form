@@ -166,12 +166,24 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="edtNome">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="edtNomeKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="edtSexo">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="edtSexoKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="edtIdade">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="edtIdadeKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="edtMatricula">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="edtMatriculaKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnNovo">
           <Properties>
@@ -218,6 +230,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="edtAnoDeIngresso">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="edtAnoDeIngressoKeyReleased"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
