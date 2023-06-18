@@ -52,6 +52,18 @@ public class Aluno {
         }
         
     }
+    
+    public String cabecalho(){
+        return "nome;sexo;idade;matricula;ano;\n";
+    }
+    
+    public String atributosCSV(){
+        return this.nome + ";"
+        + this.sexo  + ";"
+        + this.idade  + ";"
+        + this.matricula  + ";"
+        + this.anoDeIngresso  + ";\n";
+    }
 
     public String getNome() {
         return nome;

@@ -7,6 +7,9 @@ package visao;
 import com.jocile.escola.entidades.Aluno;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -96,7 +99,7 @@ public class FrCadAluno extends javax.swing.JFrame {
         return a;
     }
 
-    public void loadArquivoAlunos(String caminho){
+    public void loadArquivoAlunos(String caminho) {
         FileReader f = null;
         try {
             f = new FileReader(caminho);
@@ -105,7 +108,7 @@ public class FrCadAluno extends javax.swing.JFrame {
         }
         Scanner arquivo = new Scanner(f);
         arquivo.useDelimiter("\n");//lendo a linha
-        
+
         String cabecalho = arquivo.next();
         while (arquivo.hasNext()) {
             String linhaLida = arquivo.next();
@@ -115,6 +118,36 @@ public class FrCadAluno extends javax.swing.JFrame {
         }
         arquivo.close();
     }
+
+    public String criarListaCSV() {
+        String txt = "";
+        Aluno aluno = new Aluno();
+        aluno.cabecalho();
+        for (int i = 0; i <= this.lista.size() - 1; i++) {
+            Aluno a = this.lista.get(i);
+            txt = txt + a.atributosCSV();
+        }
+        return txt;
+    }
+    
+    public void salvarAlunos(String txt){
+        FileWriter arq = null;
+        try {
+            arq = new FileWriter("Alunos.txt");
+            PrintWriter gravaArq = new PrintWriter(arq);
+            gravaArq.print(txt);
+            arq.close();
+        } catch (IOException ex) {
+            Logger.getLogger(FrCadAluno.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                arq.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FrCadAluno.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -375,6 +408,8 @@ public class FrCadAluno extends javax.swing.JFrame {
         //mostra o resultado
         edtResultado.setText(this.mostrarLista());
         this.resetarCampos(false);
+        String txt = this.criarListaCSV();
+        this.salvarAlunos(txt);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void edtNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtNomeKeyReleased
