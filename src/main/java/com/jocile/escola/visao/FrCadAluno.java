@@ -1,5 +1,6 @@
 package com.jocile.escola.visao;
 
+import com.jocile.escola.dao.AlunoDAO;
 import com.jocile.escola.entidades.Aluno;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -17,6 +18,7 @@ public class FrCadAluno extends javax.swing.JFrame {
     private ArrayList<Aluno> lista;
     private int novoOuEditar;//=0 caso seja clicado no botão Novo ou =1 no editar
     private int indiceDeEdicao;
+    private AlunoDAO repositorio = new AlunoDAO();
 
     public FrCadAluno() {
         initComponents();
@@ -25,8 +27,9 @@ public class FrCadAluno extends javax.swing.JFrame {
         indiceDeEdicao = -1;
         lista = new ArrayList<>();
         this.resetarCampos(false);
-        loadArquivoAlunos("Alunos.txt");
-        edtResultado.setText(this.mostrarLista());
+        //this.loadArquivoAlunos("Alunos.txt");
+        //edtResultado.setText(this.mostrarLista());
+        edtResultado.setText(this.repositorio.mostrarLista());
     }
 
     public void hideShowCampos(boolean flag) {
@@ -99,20 +102,21 @@ public class FrCadAluno extends javax.swing.JFrame {
         FileReader f = null;
         try {
             f = new FileReader(caminho);
+            Scanner arquivo = new Scanner(f);
+            arquivo.useDelimiter("\n");//lendo a linha
+
+            String cabecalho = arquivo.next();
+            while (arquivo.hasNext()) {
+                String linhaLida = arquivo.next();
+                Aluno a = new Aluno();
+                a.fill(linhaLida);//usa alinha para prencher o aluno com: nome;sexo;idade;matricula;ano;
+                this.lista.add(a);
+            }
+            arquivo.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(FrCadAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Scanner arquivo = new Scanner(f);
-        arquivo.useDelimiter("\n");//lendo a linha
 
-        String cabecalho = arquivo.next();
-        while (arquivo.hasNext()) {
-            String linhaLida = arquivo.next();
-            Aluno a = new Aluno();
-            a.fill(linhaLida);//usa alinha para prencher o aluno com: nome;sexo;idade;matricula;ano;
-            this.lista.add(a);
-        }
-        arquivo.close();
     }
 
     public String criarListaCSV() {
@@ -125,8 +129,8 @@ public class FrCadAluno extends javax.swing.JFrame {
         }
         return txt;
     }
-    
-    public void salvarAlunos(String txt){
+
+    public void salvarAlunos(String txt) {
         FileWriter arq = null;
         try {
             arq = new FileWriter("Alunos.txt");

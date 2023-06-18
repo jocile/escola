@@ -1,20 +1,14 @@
 package com.jocile.escola.entidades;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class Aluno {
 
     private String nome;
     private char sexo;
     private int idade;
     private String matricula;
-    private Date anoDeIngresso;
+    private int anoDeIngresso;
 
-    public Aluno(String nome, char sexo, int idade, String matricula, Date anoDeIngresso) {
+    public Aluno(String nome, char sexo, int idade, String matricula, int anoDeIngresso) {
         this.nome = nome;
         this.sexo = sexo;
         this.idade = idade;
@@ -27,7 +21,7 @@ public class Aluno {
         this.sexo = 'f';
         this.idade = 0;
         this.matricula = "";
-        this.anoDeIngresso = new Date();
+        this.anoDeIngresso = 0;
     }
     
     /*Método que para prencher o aluno com: nome;sexo;idade;matricula;ano;
@@ -39,24 +33,22 @@ public class Aluno {
         this.nome = vet[0];
         this.sexo = vet[1].charAt(0);
         this.idade = Integer.parseInt(vet[2]);
-        this.matricula = vet[3];
-        SimpleDateFormat anoF = new SimpleDateFormat("yyyy");
-        this.anoDeIngresso = new Date();
-        
-        try {
-            Date ano;
-            ano = anoF.parse(vet[4]);
-            this.anoDeIngresso = ano;
-        } catch (ParseException ex) {
-            Logger.getLogger(Aluno.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.matricula = vet[3];        
+        this.anoDeIngresso = Integer.parseInt(vet[4]);
         
     }
     
+    /** Retorna o cabeçalho para o arquivo txt     * 
+     * @return String
+     */
     public String cabecalho(){
         return "nome;sexo;idade;matricula;ano;\n";
     }
     
+    /** Retorna uma linha preenchida com os atributos do aluno
+     * 
+     * @return String
+     */
     public String atributosCSV(){
         return this.nome + ";"
         + this.sexo  + ";"
@@ -97,12 +89,23 @@ public class Aluno {
         this.matricula = matricula;
     }
 
-    public Date getAnoDeIngresso() {
+    public int getAnoDeIngresso() {
         return anoDeIngresso;
     }
 
-    public void setAnoDeIngresso(Date anoDeIngresso) {
+    public void setAnoDeIngresso(int anoDeIngresso) {
         this.anoDeIngresso = anoDeIngresso;
+    }
+    
+    @Override
+    public boolean equals(Object obj){
+        Aluno outro = (Aluno) obj;
+        if(!super.equals(obj))
+            return false;       
+        else if(this.matricula.equals(outro.getMatricula()))
+            return false;
+        
+        return true;
     }
 
     @Override
@@ -112,6 +115,7 @@ public class Aluno {
                 + "Sexo:" + this.sexo + "\n"
                 + "Idade: " + this.idade + "\n"
                 + "Matricula: " + this.matricula + "\n"
+                + "Ano de ingresso: " + this.anoDeIngresso + "\n"
                 + "__________________________\n");
     }
 }

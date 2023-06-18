@@ -11,23 +11,30 @@ import java.util.logging.Logger;
  * @author joc
  */
 public abstract class DAO {
+
     protected String pathArquivo;
-    
-    public DAO(){
+
+    public DAO() {
         this.pathArquivo = "arquivo.txt";
     }
 
     public DAO(String pathArquivo) {
         this.pathArquivo = pathArquivo;
     }
-    
-    /**Deleta o objeto
+
+    /**
+     * Deleta o objeto
+     *
      * @param obj
      * @return boolean
      */
     public abstract boolean delete(Object obj);
-    
-    protected void save(String txt){
+
+    /**
+     *
+     * @param txt String para ser salvo
+     */
+    protected void save(String txt) {
         FileWriter arq = null;
         try {
             arq = new FileWriter(this.pathArquivo);
@@ -39,10 +46,10 @@ public abstract class DAO {
         } finally {
             try {
                 arq.close();
-            } catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println(ex.getMessage());
             }
         }
-        
+
     }
 }
